@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Chat Viewer</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+    <script src="../viewer.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">
+                Single View Markdown Chat Viewer
+            </h1>
+        </div>
+        <div class="card-content">
+            <div id="currentFileName" class="current-file"></div>
+            <div class="controls">
+                <select id="sessionSelect" class="session-select">
+                    <option value="all">All Sessions</option>
+                </select>
+            </div>
+            <div class="messages" id="messagesContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSession = 'all';
+
+        document.getElementById('sessionSelect').addEventListener('change', function(event) {
+            currentSession = event.target.value;
+            displayMessagesInContainer('messagesContainer', currentSession);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            displayMessagesInContainer('messagesContainer', currentSession);
+        });
+    </script>
+</body>
+</html>
