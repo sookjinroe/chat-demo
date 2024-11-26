@@ -34,7 +34,10 @@ function loadFromLocalStorage() {
 function updateFileNameDisplay(fileName) {
     const fileLabel = document.getElementById('currentFileName');
     if (fileName) {
-        fileLabel.textContent = `Current file: ${fileName}`;
+        // 파일 확장자 제거 (.으로 split하고 마지막 요소 제외)
+        const nameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
+        // "Current file: " 텍스트 제거하고 파일명만 표시
+        fileLabel.textContent = nameWithoutExtension;
         fileLabel.classList.add('active');
     } else {
         fileLabel.textContent = 'No file loaded';
